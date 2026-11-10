@@ -146,5 +146,12 @@ Platform-independent domain logic with no Electron or browser dependencies:
 - `docs/STAGE_2_ACCEPTANCE_REPORT.md` — Acceptance report
 
 
+## Repository
+
+- **GitHub**: https://github.com/diptansiu/Custom_esp_simulator
+- **Clone**: `git clone https://github.com/diptansiu/Custom_esp_simulator.git`
+- **Branch**: `main`
+- **License**: MIT
+
 ## License
 MIT
