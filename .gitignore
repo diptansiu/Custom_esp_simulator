@@ -1,0 +1,46 @@
+# Dependencies
+node_modules/
+
+# Build and temporary files
+backend/build/*
+!backend/build/.gitkeep
+build/
+dist/
+release/
+out/
+temp/
+tmp/
+*.tmp
+*.old
+*.session
+runtime-sessions/
+coverage/
+.nyc_output/
+.cache/
+ESP Simulator.app/
+
+# Logs
+*.log
+server.log
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Environment secrets
+.env
+.env.local
+
+# Test artifacts
+test_output.txt
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Backup files
+*.bak
+* copy.*

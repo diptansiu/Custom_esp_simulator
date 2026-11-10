@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ESP Simulator Studio — ESP8266 NodeMCU & ESP32-WROOM-DA</title>
+  <!-- Tailwind CSS (vendored Play CDN build, offline) -->
+  <script src="js/tailwind.js?v=2"></script>
+  <!-- Web fonts (local, offline) -->
+  <link rel="stylesheet" href="fonts/fonts.css?v=2">
+  <!-- App styles -->
+  <link rel="stylesheet" href="css/style.css?v=2">
+  <!-- Cybernetic design system tokens (CSS custom properties + component shells) -->
+  <link rel="stylesheet" href="css/design-tokens.css?v=2">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#00d5ff">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="ESP Simulator Studio">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <script>
+    // Tailwind (vendored) + Stitch design system tokens. Utility classes from Tailwind,
+    // semantic tokens from design-tokens.css.
+  </script>
+</head>
+
+<body class="flex flex-col h-screen min-h-screen bg-[#011525] text-slate-100 select-none overflow-hidden">
+
+  <!-- APP SHELL -->
+  <div id="app-shell" class="flex flex-col h-full">
+
+    <!-- TOP NAVIGATION / TOOLBAR -->
+    <header class="min-h-14 bg-[#0d1420] border-b border-[#26374a] px-4 py-1.5 flex flex-wrap items-center justify-between gap-x-3 gap-y-1.5 shrink-0 shadow-sm z-30">
+      <!-- Brand / Title -->
+      <div class="flex items-center space-x-3 shrink-0">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-sky-600 to-cyan-400 flex items-center justify-center shadow-lg shadow-sky-500/20">
+          <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="font-bold text-sm tracking-wide text-white whitespace-nowrap">ESP Simulator Studio</span>
+            <span class="text-[10px] px-1.5 py-0.5 rounded bg-[#00d5ff]/20 text-[#00d5ff] border border-[#00d5ff]/40 font-semibold">v1.0</span>
+          </div>
+          <p class="text-[10px] text-[#91a4ba] hidden xl:block whitespace-nowrap">ESP8266 & ESP32 Dual-Antenna Virtual Lab</p>
+        </div>
+      </div>
+
+      <!-- Central Controls -->
+      <div class="flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5">
+        <!-- Board Selector -->
+        <div class="flex items-center space-x-2 bg-[#101319] border border-[#26374a] rounded-lg px-2.5 py-1">
+          <svg class="w-3.5 h-3.5 text-[#00d5ff]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/>
+          </svg>
+          <span class="text-[10px] text-[#91a4ba] font-medium">Board:</span>
+          <select id="board-select" class="bg-transparent text-xs text-[#00d5ff] font-semibold outline-none cursor-pointer">
+            <option value="esp8266-nodemcu" class="bg-[#101319] text-slate-200">NodeMCU 1.0 (ESP8266)</option>
+            <option value="esp32-wroom-da" class="bg-[#101319] text-slate-200">ESP32-WROOM-DA (Dual Antenna)</option>
+            <option value="esp32-devkit-v1" class="bg-[#101319] text-slate-200">ESP32 DevKit V1 (30-pin)</option>
+            <option value="esp32-dev-board" class="bg-[#101319] text-slate-200">ESP32 Dev Board</option>
+            <option value="esp32-c3-dev-board" class="bg-[#101319] text-slate-200">ESP32-C3 Dev Board</option>
+            <option value="esp32-c5-dev-board" class="bg-[#101319] text-slate-200">ESP32-C5 Dev Board</option>
+            <option value="esp32-c6-dev-board" class="bg-[#101319] text-slate-200">ESP32-C6 Dev Board</option>
+            <option value="esp32-h2-dev-board" class="bg-[#101319] text-slate-200">ESP32-H2 Dev Board</option>
+            <option value="esp32-p4-dev-board" class="bg-[#101319] text-slate-200">ESP32-P4 Dev Board</option>
+            <option value="esp32-s2-dev-board" class="bg-[#101319] text-slate-200">ESP32-S2 Dev Board</option>
+            <option value="esp32-s3-dev-board" class="bg-[#101319] text-slate-200">ESP32-S3 Dev Board</option>
+            <option value="arduino-nano-esp32" class="bg-[#101319] text-slate-200">Arduino Nano ESP32</option>
+            <option value="esp32-dev-module" class="bg-[#101319] text-slate-200">ESP32 Dev Module</option>
+            <option value="wemos-lolin32" class="bg-[#101319] text-slate-200">WEMOS LoLin32</option>
+            <option value="wemos-d1-mini-esp32" class="bg-[#101319] text-slate-200">WEMOS D1 MINI ESP32</option>
+            <option value="generic-esp8266-module" class="bg-[#101319] text-slate-200">Generic ESP8266 Module</option>
+            <option value="generic-esp8285-module" class="bg-[#101319] text-slate-200">Generic ESP8285 Module</option>
+            <option value="lifely-agrumino-lemon-v4" class="bg-[#101319] text-slate-200">Lifely Agrumino Lemon v4</option>
+            <option value="espduino-esp-13-module" class="bg-[#101319] text-slate-200">ESPDuino (ESP-13 Module)</option>
+            <option value="adafruit-feather-huzzah-esp8266" class="bg-[#101319] text-slate-200">Adafruit Feather HUZZAH ESP8266</option>
+            <option value="wifi-kit-8" class="bg-[#101319] text-slate-200">WiFi Kit 8</option>
+            <option value="invent-one" class="bg-[#101319] text-slate-200">Invent One</option>
+            <option value="xinabox-cw01" class="bg-[#101319] text-slate-200">XinaBox CW01</option>
+            <option value="espresso-lite-1-0" class="bg-[#101319] text-slate-200">ESPresso Lite 1.0</option>
+            <option value="espresso-lite-2-0" class="bg-[#101319] text-slate-200">ESPresso Lite 2.0</option>
+            <option value="phoenix-1-0" class="bg-[#101319] text-slate-200">Phoenix 1.0</option>
+            <option value="phoenix-2-0" class="bg-[#101319] text-slate-200">Phoenix 2.0</option>
+            <option value="nodemcu-0-9-esp-12-module" class="bg-[#101319] text-slate-200">NodeMCU 0.9 (ESP-12 Module)</option>
+            <option value="nodemcu-1-0-esp-12e-module" class="bg-[#101319] text-slate-200">NodeMCU 1.0 (ESP-12E Module)</option>
+            <option value="olimex-mod-wifi-esp8266-dev" class="bg-[#101319] text-slate-200">Olimex MOD-WIFI-ESP8266(-DEV)</option>
+            <option value="sparkfun-esp8266-thing" class="bg-[#101319] text-slate-200">SparkFun ESP8266 Thing</option>
+            <option value="sparkfun-esp8266-thing-dev" class="bg-[#101319] text-slate-200">SparkFun ESP8266 Thing Dev</option>
+            <option value="sparkfun-blynk-board" class="bg-[#101319] text-slate-200">SparkFun Blynk Board</option>
+            <option value="sweetpea-esp-210" class="bg-[#101319] text-slate-200">SweetPea ESP-210</option>
+            <option value="lolin-wemos-d1-r2-mini" class="bg-[#101319] text-slate-200">LOLIN(WEMOS) D1 R2 & mini</option>
+            <option value="lolin-wemos-d1-esp-wroom-02" class="bg-[#101319] text-slate-200">LOLIN(WEMOS) D1 ESP-WROOM-02</option>
+            <option value="lolin-wemos-d1-mini-clone" class="bg-[#101319] text-slate-200">LOLIN(WEMOS) D1 mini (clone)</option>
+            <option value="lolin-wemos-d1-mini-pro" class="bg-[#101319] text-slate-200">LOLIN(WEMOS) D1 mini Pro</option>
+            <option value="lolin-wemos-d1-mini-lite" class="bg-[#101319] text-slate-200">LOLIN(WEMOS) D1 mini Lite</option>
+            <option value="lolin-wemos-d1-r1" class="bg-[#101319] text-slate-200">LOLIN(WeMos) D1 R1</option>
+            <option value="espino-esp-12-module" class="bg-[#101319] text-slate-200">ESPino (ESP-12 Module)</option>
+            <option value="thaieasyelec-s-espino" class="bg-[#101319] text-slate-200">ThaiEasyElec's ESPino</option>
+            <option value="wifinfo" class="bg-[#101319] text-slate-200">WifInfo</option>
+            <option value="arduino" class="bg-[#101319] text-slate-200">Arduino</option>
+            <option value="4d-systems-gen4-iod-range" class="bg-[#101319] text-slate-200">4D Systems gen4 IoD Range</option>
+            <option value="digistump-oak" class="bg-[#101319] text-slate-200">Digistump Oak</option>
+            <option value="wifiduino" class="bg-[#101319] text-slate-200">WiFiduino</option>
+            <option value="amperka-wifi-slot" class="bg-[#101319] text-slate-200">Amperka WiFi Slot</option>
+            <option value="seeed-wio-link" class="bg-[#101319] text-slate-200">Seeed Wio Link</option>
+            <option value="espectro-core" class="bg-[#101319] text-slate-200">ESPectro Core</option>
+            <option value="schirmilabs-eduino-wifi" class="bg-[#101319] text-slate-200">Schirmilabs Eduino WiFi</option>
+            <option value="itead-sonoff" class="bg-[#101319] text-slate-200">ITEAD Sonoff</option>
+            <option value="doit-esp-mx-devkit-esp8285" class="bg-[#101319] text-slate-200">DOIT ESP-Mx DevKit (ESP8285)</option>
+            <option value="adafruit-huzzah-esp8266-esp-12" class="bg-[#101319] text-slate-200">Adafruit HUZZAH ESP8266 (ESP-12)</option>
+            <option value="wemos-d1" class="bg-[#101319] text-slate-200">WeMos D1</option>
+            <option value="wemos-d1-mini" class="bg-[#101319] text-slate-200">WeMos D1 mini</option>
+            <option value="espduino" class="bg-[#101319] text-slate-200">ESPDuino</option>
+            <option value="espino-wroom-02-module" class="bg-[#101319] text-slate-200">ESPino (WROOM-02 Module)</option>
+          </select>
+        </div>
+
+        <!-- Language Selector -->
+        <div class="flex items-center space-x-2 bg-[#101319] border border-[#26374a] rounded-lg px-2.5 py-1">
+          <svg class="w-3.5 h-3.5 text-[#a879ff]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+          </svg>
+          <span class="text-[10px] text-[#91a4ba] font-medium">Engine:</span>
+          <select id="lang-select" class="bg-transparent text-xs text-[#a879ff] font-semibold outline-none cursor-pointer">
+            <option value="cpp" class="bg-[#101319] text-slate-200">Arduino C++</option>
+            <option value="python" class="bg-[#101319] text-slate-200">MicroPython</option>
+          </select>
+        </div>
+
+        <!-- Real Execution Mode Selector -->
+        <div class="flex items-center space-x-2 bg-[#101319] border border-[#00d5ff]/30 rounded-lg px-2.5 py-1 shadow-[0_0_8px_rgba(0,213,255,0.15)]">
+          <svg class="w-3.5 h-3.5 text-[#00d5ff]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+          <span class="text-xs text-[#00d5ff] font-semibold">Mode:</span>
+          <select id="runner-mode-select" class="bg-transparent text-xs text-[#00d5ff] font-semibold outline-none cursor-pointer">
+            <option value="native" id="opt-runner-native" class="bg-[#101319] text-slate-200" selected>⚡ Native Clang++ Compiler</option>
+            <option value="browser" class="bg-[#101319] text-slate-200">🌐 In-Browser Fast Engine</option>
+          </select>
+        </div>
+
+        <!-- Preset Example Selector -->
+        <div class="hidden xl:flex items-center space-x-1.5 bg-[#101319] border border-[#26374a] rounded-lg px-2 py-1">
+          <svg class="w-3.5 h-3.5 text-[#a879ff]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+          </svg>
+          <select id="example-select" class="bg-transparent text-xs text-slate-200 outline-none cursor-pointer">
+            <option value="" disabled selected>Load Preset Project...</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Right Simulation Action Buttons -->
+      <div class="flex flex-wrap items-center justify-end gap-x-2 gap-y-1.5 ml-auto">
+        <!-- Audio Toggle -->
+        <button id="btn-mute-sound" class="px-2.5 py-1.5 text-xs rounded-lg bg-[#101319] border border-[#26374a] hover:bg-surface-container-high hover:text-primary font-[10px] transition flex items-center space-x-1.5 text-slate-300" title="Toggle simulation audio">
+          <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+          </svg>
+          <span class="hidden xl:inline">Audio ON</span>
+        </button>
+
+        <!-- Reset Board -->
+        <button id="btn-reset-sim" class="px-3 py-1.5 text-xs rounded-lg bg-[#101319] border border-[#26374a] hover:bg-[#1f2430] text-slate-200 transition flex items-center space-x-1.5" title="Restart simulated MCU">
+          <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+          </svg>
+          <span class="hidden xl:inline">Reset</span>
+        </button>
+
+        <!-- Run Simulation (Prominent) -->
+        <button id="btn-run-sim" class="flex items-center px-6 py-2.5 rounded-xl bg-[#00d5ff] hover:bg-[#35d7ff] text-[#080d14] font-bold text-sm shadow-[0_0_0_2px_rgba(0,213,255,0.4)] shadow-lg shadow-[0_0_12px_rgba(0,213,255,0.35)] transition-all active:scale-95 space-x-2" title="Start Simulation (Space)">
+          <svg id="run-icon" class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+          <span id="run-label">Run Simulation</span>
+        </button>
+
+        <!-- Projects Manager -->
+        <button id="btn-projects" class="px-3 py-1.5 text-xs rounded-lg bg-[#161a22] hover:bg-[#1f2430] border border-[#26374a] hover:border-[#a879ff] text-slate-200 transition flex items-center space-x-1.5" title="Manage Projects">
+          <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+          </svg>
+          <span class="hidden xl:inline">Projects</span>
+        </button>
+
+        <!-- Libraries Manager -->
+        <button id="btn-libraries" class="px-3 py-1.5 text-xs rounded-lg bg-[#161a22] hover:bg-[#1f2430] border border-[#26374a] hover:border-[#a879ff] text-slate-200 transition flex items-center space-x-1.5" title="Manage Libraries">
+          <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M12 18a2.5 2.5 0 0 1-2.5 2.5H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2h13a2.5 2.5 0 0 1 2.5 2.5v13z"/><path d="M16 11h6M4 11h6M4 16h6"/><path d="M16 15h6M4 17h6"/><path d="M4 8h6"/><path d="M16 11h6"/>
+          </svg>
+          <span class="hidden xl:inline">Libraries</span>
+        </button>
+
+        <!-- Examples Library -->
+        <button id="btn-examples-library" class="px-3 py-1.5 text-xs rounded-lg bg-[#161a22] hover:bg-[#1f2430] border border-slate-800 hover:border-[#a879ff] text-slate-200 transition flex items-center space-x-1.5" title="Arduino IDE Examples Library">
+          <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 0 3-3h7z"/>
+          </svg>
+          <span class="hidden xl:inline">Examples Library</span>
+        </button>
+
+        <!-- Remote Connect / Join Session -->
+        <button id="btn-remote-connect" class="px-3 py-1.5 text-xs rounded-lg bg-[#101319] border border-[#26374a] hover:border-[#00d5ff] text-slate-200 transition flex items-center space-x-1.5" title="Join & Operate Remote Session">
+          <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="10" y1="14" x2="10" y2="22"/><line x1="14" y1="14" x2="14" y2="22"/>
+          </svg>
+          <span class="hidden xl:inline">Connect</span>
+        </button>
+
+        <!-- Projects Manager -->
+        <div class="flex items-center space-x-1 border-l border-[#26374a] pl-2">
+          <button id="btn-new-project" class="p-1.5 text-slate-400 hover:text-on-surface hover:bg-slate-800 rounded transition" title="New Blank Project">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/>
+            </svg>
+          </button>
+          <button id="btn-export-project" class="p-1.5 text-slate-400 hover:text-on-surface hover:bg-slate-800 rounded transition" title="Export Project JSON">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+          </button>
+          <button id="btn-import-project" class="p-1.5 text-slate-400 hover:text-on-surface hover:bg-slate-800 rounded transition" title="Import Project JSON">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+          </button>
+          <input type="file" id="input-import-file" class="hidden" accept=".json"/>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN WORKSPACE -->
+    <main class="flex-1 relative flex overflow-hidden">
+      <!-- LEFT SIDEBAR: COMPONENTS PALETTE -->
+      <aside class="min-w-[180px] max-w-[30%] w-1/4 bg-[#101319] border-r border-[#26374a] flex flex-col shrink-0 select-none resize-x overflow-auto">
+        <div class="p-3 border-b border-[#26374a] flex items-center justify-between">
+          <div class="flex items-center space-x-1.5 text-slate-300">
+            <svg class="w-3.5 h-3.5 text-sky-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 2 7 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+            <span class="font-bold text-xs uppercase tracking-wider">Components</span>
+          </div>
+          <span class="text-[10px] text-slate-500">Click to add</span>
+        </div>
+
+        <!-- Component Categories -->
+        <div id="component-palette-container" class="flex-1 overflow-y-auto p-3 space-y-4">
+          <!-- Components will be populated by JS -->
+        </div>
+
+        <!-- Wire Color Selector -->
+        <div class="pt-3 border-t border-[#26374a]">
+          <div class="flex items-center space-x-1.5 mb-2 text-slate-400">
+            <svg class="w-3.5 h-3.5 text-sky-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>
+            </svg>
+            <span class="text-[11px] font-semibold uppercase tracking-wider">Wire Draw Color</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <button class="wire-color-pill w-5 h-5 rounded-full bg-[#00d5ff] ring-2 ring-white scale-110 transition shadow-sm" data-color="#38bdf8" title="Cyan (Signal)"></button>
+            <button class="wire-color-pill w-5 h-5 rounded-full bg-[#22d3ee] transition shadow-sm" data-color="#22d3ee" title="Cyan Light (Signal)"></button>
+            <button class="wire-color-pill w-5 h-5 rounded-full bg-[#22d3ee] transition shadow-sm" data-color="#22d3ee" title="Cyan Light (Signal)"></button>
+            <button class="wire-color-pill w-5 h-5 rounded-full bg-[#fbbf24] transition shadow-sm" data-color="#fbbf24" title="Yellow (Signal)"></button>
+            <button class="wire-color-pill w-5 h-5 rounded-full bg-[#ef4444] transition shadow-sm" data-color="#ef4444" title="Red (3.3V / 5V)"></button>
+            <button class="wire-color-pill w-5 h-5 rounded-full bg-[#1e293b] border border-[#26374a] transition shadow-sm" data-color="#1e293b" title="Black (GND)"></button>
+            <button class="wire-color-pill w-5 h-5 rounded-full bg-[#a879ff] transition shadow-sm" data-color="#a879ff" title="Purple"></button>
+          </div>
+          <button id="btn-clear-wires" class="w-full mt-3 px-2 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded text-[11px] border border-slate-700 transition flex items-center justify-center space-x-1.5">
+            <svg class="w-3 h-3 text-[#ef4444]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+            </svg>
+            <span>Clear All Wires</span>
+          </button>
+
+          <!-- Wire Manager -->
+          <div class="mt-3 pt-3 border-t border-slate-800">
+            <div class="flex items-center justify-between mb-2 text-slate-400">
+              <span class="text-[11px] font-semibold uppercase tracking-wider">Wire Manager</span>
+              <span id="wire-count" class="text-[10px] text-slate-500">0 wires</span>
+            </div>
+            <div id="wire-manager-list" class="space-y-1 max-h-[200px] overflow-y-auto">
+              <span class="text-slate-500 italic text-[10px]">No wires connected. Click pins to create wires.</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- CENTER: CIRCUIT CANVAS (Schematic / Breadboard) -->
+      <div class="flex-1 min-w-0 bg-[#080d14] relative overflow-hidden flex flex-col select-none">
+        <!-- Dot-matrix grid background -->
+        <div class="absolute inset-0 pointer-events-none" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.06) 1px, transparent 0); background-size: 16px 16px;"></div>
+        <!-- Canvas container host -->
+        <div class="flex-1 relative min-h-0" id="canvas-container"></div>
+      </div>
+
+      <!-- RIGHT: CODE EDITOR & SERIAL TERMINAL -->
+      <aside class="min-w-[320px] max-w-[45%] w-1/3 bg-[#14171d] border-l border-slate-800 flex flex-col shrink-0">
+        <!-- TOP: CODE EDITOR -->
+        <div class="flex-1 flex flex-col min-h-[300px] overflow-hidden">
+          <!-- Editor Container Host (CodeEditor renders its own header/toolbar) -->
+          <div class="flex-1 relative" id="editor-container"></div>
+        </div>
+
+        <!-- BOTTOM: TABS (SERIAL TERMINAL & LOGIC INSPECTOR) -->
+        <div class="min-h-[160px] max-h-[40%] h-1/3 border-t border-slate-800 flex flex-col bg-[#0f1115]">
+          <!-- Tab Navigation Buttons -->
+          <div class="h-8 bg-[#12141a] border-b border-slate-800 flex items-center px-2 space-x-2 shrink-0">
+            <button id="tab-btn-serial" class="px-3 py-1 text-xs font-semibold border-b-2 border-sky-500 text-sky-400 transition flex items-center space-x-1.5">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/>
+              </svg>
+              <span>Serial Terminal</span>
+            </button>
+            <button id="tab-btn-inspector" class="px-3 py-1 text-xs font-semibold border-b-2 border-transparent text-slate-400 hover:text-slate-200 transition flex items-center space-x-1.5">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+              </svg>
+              <span>GPIO Inspector</span>
+            </button>
+          </div>
+
+          <!-- Tab 1: Serial Terminal Host -->
+          <div class="flex-1 overflow-hidden" id="serial-container"></div>
+
+          <!-- Tab 2: Pin Inspector Host (Initially hidden) -->
+          <div class="flex-1 overflow-hidden hidden" id="inspector-container"></div>
+        </div>
+
+      </aside>
+
+    </main>
+
+  </div>
+  <!-- End of #app-shell -->
+
+  <!-- Projects Modal -->
+  <div id="proj-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+    <div class="bg-[#14171d] border border-slate-700 rounded-xl w-[560px] max-h-[70vh] flex flex-col shadow-2xl">
+      <div class="flex items-center justify-between px-4 py-3 border-b border-slate-800">
+        <span class="font-bold text-slate-200 text-sm">Project Manager</span>
+        <button id="proj-close" class="text-slate-400 hover:text-white">✕</button>
+      </div>
+      <div class="p-3 flex space-x-2 border-b border-slate-800">
+        <input id="proj-name" placeholder="Project name" class="flex-1 bg-[#1e232c] border border-slate-700 text-slate-100 px-3 py-1.5 rounded text-xs outline-none focus:border-sky-500"/>
+        <button id="proj-save" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded text-xs font-semibold">Save Current</button>
+      </div>
+      <div class="flex-1 overflow-y-auto p-3">
+        <div id="proj-list" class="space-y-1"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Remote Connect / Join Modal -->
+  <div id="remote-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+    <div class="bg-[#14171d] border border-cyan-700 rounded-xl w-[520px] max-h-[75vh] flex flex-col shadow-2xl">
+      <div class="flex items-center justify-between px-4 py-3 border-b border-slate-800">
+        <span class="font-bold text-cyan-200 text-sm">Remote Connect — Join Session</span>
+        <button id="remote-close" class="text-slate-400 hover:text-white">✕</button>
+      </div>
+      <div class="p-4 space-y-3">
+        <div>
+          <label class="block text-[10px] text-slate-400 mb-1 uppercase tracking-wider">Server / Session</label>
+          <input id="remote-server" placeholder="http://localhost:3000" class="w-full bg-[#1e232c] border border-slate-700 text-slate-100 px-3 py-1.5 rounded text-xs outline-none focus:border-cyan-500"/>
+        </div>
+        <div>
+          <label class="block text-[10px] text-slate-400 mb-1 uppercase tracking-wider">Session ID</label>
+          <input id="remote-session" placeholder="sim_..." class="w-full bg-[#1e232c] border border-slate-700 text-slate-100 px-3 py-1.5 rounded text-xs outline-none focus:border-cyan-500"/>
+        </div>
+        <div class="flex gap-2">
+          <button id="remote-connect" class="flex-1 bg-cyan-600 hover:bg-cyan-500 text-white rounded text-xs font-semibold">Join</button>
+          <button id="remote-disconnect" class="hidden px-3 bg-red-600 hover:bg-red-500 text-white rounded text-xs font-semibold">Disconnect</button>
+        </div>
+        <div id="remote-status" class="text-[10px] text-slate-400 min-h-[14px]"></div>
+
+        <div class="border-t border-slate-800 pt-3">
+          <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1 uppercase tracking-wider">
+            <span>Remote GPIO Control</span>
+            <span id="remote-dot" class="w-1.5 h-1.5 rounded-full bg-slate-600"></span>
+          </div>
+          <div class="grid grid-cols-2 gap-2" id="remote-controls">
+            <!-- populated by JS -->
+          </div>
+          <div class="mt-2">
+            <label class="block text-[10px] text-slate-400 mb-1">Serial Command</label>
+            <div class="flex gap-1">
+              <input id="remote-serial" placeholder="Send text..." class="flex-1 bg-[#1e232c] border border-slate-700 text-slate-100 px-2 py-1.5 rounded text-xs outline-none focus:border-cyan-500"/>
+              <button id="remote-serial-send" class="px-2.5 bg-cyan-600 hover:bg-cyan-500 text-white rounded text-[10px]">Send</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Examples Library Modal -->
+  <div id="ex-lib-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+    <div class="bg-[#14171d] border border-purple-700 rounded-xl w-[700px] max-h-[85vh] flex flex-col shadow-2xl">
+      <div class="flex items-center justify-between px-4 py-3 border-b border-slate-800">
+        <span class="font-bold text-purple-200 text-sm">Arduino IDE Examples Library</span>
+        <button id="ex-lib-close" class="text-slate-400 hover:text-white">✕</button>
+      </div>
+      <div class="flex flex-1 overflow-hidden">
+        <!-- Categories -->
+        <div class="w-64 border-r border-slate-800 p-2 overflow-y-auto">
+          <div class="mb-2 px-2 py-1 text-[10px] text-slate-500 uppercase tracking-wider font-bold">Categories</div>
+          <div id="ex-lib-categories" class="space-y-0.5"></div>
+        </div>
+        <!-- Examples list -->
+        <div class="flex-1 p-3 flex flex-col">
+          <div class="flex items-center justify-between mb-2">
+            <span id="ex-lib-cat-title" class="text-slate-200 text-sm font-semibold">Examples</span>
+            <span id="ex-lib-count" class="text-xs text-slate-500">0 items</span>
+          </div>
+          <div id="ex-lib-list" class="overflow-y-auto space-y-1 flex-1"></div>
+          <div class="mt-2 flex justify-end">
+            <button id="ex-lib-load" class="hidden px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded text-xs font-semibold">Load Selected Example</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Libraries Modal -->
+  <div id="libs-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+    <div class="bg-[#14171d] border border-slate-700 rounded-xl w-[640px] max-h-[80vh] flex flex-col shadow-2xl">
+      <div class="flex items-center justify-between px-4 py-3 border-b border-slate-800">
+        <span class="font-bold text-slate-200 text-sm">Library Manager</span>
+        <button id="libs-close" class="text-slate-400 hover:text-white">✕</button>
+      </div>
+      <div class="flex flex-1 overflow-hidden">
+        <div class="w-48 border-r border-slate-800 p-3 overflow-y-auto">
+          <button id="libs-add" class="w-full mb-2 px-2 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded text-xs font-semibold">+ Add Library</button>
+          <label class="w-full mb-2 px-2 py-1.5 bg-amber-600 hover:bg-amber-500 text-white rounded text-xs font-semibold cursor-pointer flex items-center justify-center text-center">
+            📦 Import .zip
+            <input type="file" id="libs-zip-input" accept=".json" class="hidden"/>
+          </label>
+          <div id="libs-list" class="space-y-1"></div>
+          <div id="libs-status" class="text-[10px] text-slate-500 mt-2"></div>
+        </div>
+        <div class="flex-1 p-3 flex flex-col">
+          <input id="libs-name" placeholder="Library name (e.g. MyLib)" class="mb-2 bg-[#1e232c] border border-slate-700 text-slate-100 px-3 py-1.5 rounded text-xs outline-none focus:border-sky-500"/>
+          <textarea id="libs-code" placeholder="// Paste library header/source code here" class="flex-1 bg-[#181a1f] text-slate-200 font-mono text-xs p-3 rounded border border-slate-700 outline-none resize-none"></textarea>
+          <div class="mt-2 flex justify-end space-x-2">
+            <button id="libs-save" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded text-xs font-semibold">Save</button>
+            <button id="libs-delete" class="px-3 py-1.5 bg-red-600 hover:bg-red-500 text-white rounded text-xs font-semibold">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- App Entry Script -->
+  <script type="module" src="js/app.js?v=2"></script>
+  <!-- Register Service Worker (PWA mode only) -->
+  <script>
+    // Only register service worker in browser/PWA mode, not in Electron
+    const isElectron = !!window.desktopAPI;
+    if (!isElectron && 'serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>

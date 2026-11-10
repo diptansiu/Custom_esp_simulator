@@ -1,0 +1,71 @@
+{
+  "url": "http://127.0.0.1:3000/index.html",
+  "viewport": {
+    "w": 1356,
+    "h": 706,
+    "dpr": 1.25
+  },
+  "documentSize": {
+    "w": 1356,
+    "h": 706
+  },
+  "overflowX": false,
+  "overflowY": false,
+  "header": {
+    "x": 0,
+    "y": 0,
+    "w": 1356,
+    "h": 127
+  },
+  "palette": {
+    "x": 0,
+    "y": 127,
+    "w": 256,
+    "h": 579
+  },
+  "workbench": {
+    "x": 256,
+    "y": 127,
+    "w": 600,
+    "h": 579
+  },
+  "editor": {
+    "x": 856,
+    "y": 127,
+    "w": 500,
+    "h": 579
+  },
+  "serial": {
+    "x": 857,
+    "y": 545,
+    "w": 499,
+    "h": 160
+  },
+  "inspector": {
+    "x": 0,
+    "y": 0,
+    "w": 0,
+    "h": 0
+  },
+  "canvas": {
+    "x": 256,
+    "y": 127,
+    "w": 600,
+    "h": 579
+  },
+  "runButton": {
+    "x": 601,
+    "y": 80,
+    "w": 175,
+    "h": 40
+  },
+  "runButtonInViewport": true,
+  "overlaps": {
+    "paletteWorkbench": false,
+    "workbenchEditor": false,
+    "paletteEditor": false
+  },
+  "modalsVisible": [],
+  "tailwindLoaded": true,
+  "desktopAPI": true
+}

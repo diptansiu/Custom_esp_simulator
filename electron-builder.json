@@ -1,0 +1,49 @@
+{
+  "appId": "com.espsimulator.studio",
+  "productName": "ESP Simulator Studio",
+  "directories": {
+    "output": "dist"
+  },
+  "electronDist": "node_modules/electron/dist",
+  "asar": false,
+  "files": [
+    "server.js",
+    "package.json",
+    "public/**/*",
+    "backend/**/*",
+    "desktop/**/*"
+  ],
+  "extraMetadata": {
+    "main": "desktop/main/main.js"
+  },
+  "win": {
+    "target": [
+      {
+        "target": "nsis",
+        "arch": ["x64"]
+      },
+      {
+        "target": "portable",
+        "arch": ["x64"]
+      }
+    ],
+    "icon": "desktop/resources/icons/icon.ico",
+    "requestedExecutionLevel": "asInvoker"
+  },
+  "nsis": {
+    "artifactName": "ESP-Simulator-Studio-Setup-${arch}.exe",
+    "oneClick": false,
+    "allowToChangeInstallationDirectory": true,
+    "createDesktopShortcut": true,
+    "createStartMenuShortcut": true,
+    "shortcutName": "ESP Simulator Studio",
+    "installerIcon": "desktop/resources/icons/icon.ico",
+    "uninstallerIcon": "desktop/resources/icons/icon.ico",
+    "deleteAppDataOnUninstall": false,
+    "displayLanguageSelector": true
+  },
+  "portable": {
+    "artifactName": "ESP-Simulator-Studio-Portable-${arch}.exe"
+  },
+  "publish": null
+}

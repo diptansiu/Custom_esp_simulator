@@ -1,0 +1,41 @@
+{
+  "name": "esp-simulator",
+  "version": "1.0.0",
+  "description": "Interactive ESP8266 (NodeMCU 1.0) and ESP32-WROOM-DA Circuit Simulator & Virtual Lab",
+  "main": "desktop/main/main.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "PORT=3000 node server.js",
+    "test": "node --test",
+    "check": "node --check server.js && node --check desktop/main/main.js && node --check desktop/main/window-manager.js && node --check desktop/main/backend-manager.js && node --check desktop/main/runtime-manager.js && node --check desktop/main/storage-manager.js && node --check desktop/main/menu-manager.js && node --check desktop/main/settings-manager.js && node --check desktop/main/lifecycle-manager.js && node --check desktop/main/ipc/index.js && node --check desktop/main/ipc/application-ipc.js && node --check desktop/main/ipc/project-ipc.js && node --check desktop/main/ipc/runtime-ipc.js && node --check desktop/main/ipc/dialog-ipc.js && node --check desktop/preload/preload.js && node --check desktop/preload/desktop-api.js && for f in $(find 'public' -name '*.js'); do node --check \"$f\" || exit 1; done && echo 'All syntax checks passed'",
+    "clean": "rm -rf backend/build/*",
+    "app:dev": "electron .",
+    "app:check": "node --check desktop/main/main.js && echo 'Electron main process syntax OK'",
+    "app:test": "node --test",
+    "app:pack": "electron-builder --dir",
+    "app:build": "electron-builder --win --x64",
+    "app:build:win": "electron-builder --win --x64",
+    "app:build:portable": "electron-builder --win --x64 --portable",
+    "app:build:all": "electron-builder --win --x64"
+  },
+  "keywords": [
+    "esp8266",
+    "nodemcu",
+    "esp32",
+    "esp32-wroom-da",
+    "circuit-simulator",
+    "arduino",
+    "micropython",
+    "electron",
+    "desktop"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "electron": "^33.4.11",
+    "electron-builder": "^26.18.0"
+  }
+}

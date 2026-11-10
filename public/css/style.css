@@ -1,0 +1,282 @@
+/* ==========================================================================
+   ESP Simulator Studio — Component Styles (Stitch Design System)
+   Works alongside public/css/design-tokens.css (tokens + utilities)
+   ========================================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+/* Base — no framework utilities in HTML; everything flows from tokens. */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body);
+  background-color: var(--color-surface);
+  color: var(--color-on-surface);
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top header toolbar fallback (Tailwind utilities do the heavy lifting). */
+header {
+  min-height: 56px;
+  height: auto;
+  background-color: #0d1420;
+  border-bottom: 1px solid #26374a;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 12px;
+  padding: 6px 16px;
+}
+
+/* Main workbench — three panels: left components, center canvas, right editor. */
+main {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+/* Left components palette */
+aside:first-of-type {
+  width: 256px;
+  background-color: #101319;
+  border-right: 1px solid #26374a;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+/* Center canvas */
+#canvas-container {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Right editor + serial/inspector */
+aside:last-of-type {
+  width: 500px;
+  background-color: #14171d;
+  border-left: 1px solid slate-800;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+/* Workbench Grid Pattern */
+.bg-grid {
+  background-color: #0b0d13;
+  background-image: 
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.07) 1px, transparent 0);
+  background-size: 20px 20px;
+}
+
+/* Wire color pill (JS-driven active state) */
+.wire-color-pill {
+  border: 1px solid transparent;
+}
+
+/* Component root (draggable chips in palette) */
+.component-root {
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.45));
+  cursor: grab;
+}
+.component-root:active {
+  cursor: grabbing;
+}
+
+/* Board root shadow */
+#board-root {
+  filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.65));
+  transition: filter 0.2s ease;
+}
+
+/* Pin hover / pulse animations */
+.pin-ring {
+  transition: transform 0.15s ease, stroke-width 0.15s ease;
+}
+.pin-anchor:hover .pin-ring,
+.board-pin-anchor:hover circle:nth-child(2) {
+  stroke: #38bdf8 !important;
+  stroke-width: 2.5px !important;
+  transform: scale(1.3);
+  transform-origin: center;
+}
+
+@keyframes pulseGlow {
+  0% { r: 5px; opacity: 1; }
+  50% { r: 12px; opacity: 0.5; }
+  100% { r: 5px; opacity: 1; }
+}
+
+.pulse-pin circle:nth-child(2) {
+  stroke: #38bdf8 !important;
+  stroke-width: 2px !important;
+  animation: pulseGlow 1s infinite;
+}
+
+/* Divider handle */
+.divider-handle {
+  transition: background-color 0.2s ease;
+}
+.divider-handle:hover {
+  background-color: #38bdf8;
+}
+
+/* Custom scrollbars — minimal, instrument-grade */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0a1018;
+}
+::-webkit-scrollbar-thumb {
+  background: #26374a;
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3c494e;
+}
+
+/* Utility overrides for design-system classes used in HTML but defined in tokens */
+.hidden { display: none !important; }
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.flex-1 { flex: 1 1 0%; }
+.min-h-0 { min-height: 0; }
+.relative { position: relative; }
+.absolute { position: absolute; }
+.inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+.pointer-events-none { pointer-events: none; }
+.overflow-hidden { overflow: hidden; }
+.overflow-auto { overflow: auto; }
+.overflow-y-auto { overflow-y: auto; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.justify-end { justify-content: flex-end; }
+.gap-2 { gap: 0.5rem; }
+.gap-3 { gap: 0.75rem; }
+.space-x-1\.5 > * + * { margin-left: 0.375rem; }
+.space-x-2 > * + * { margin-left: 0.5rem; }
+.space-x-3 > * + * { margin-left: 0.75rem; }
+.space-y-1 > * + * { margin-top: 0.25rem; }
+.space-y-1\.5 > * + * { margin-top: 0.375rem; }
+.space-y-2 > * + * { margin-top: 0.5rem; }
+.space-y-3 > * + * { margin-top: 0.75rem; }
+.space-y-4 > * + * { margin-top: 1rem; }
+.ml-auto { margin-left: auto; }
+.mt-3 { margin-top: 0.75rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 0.75rem; }
+.p-2 { padding: 0.5rem; }
+.p-3 { padding: 0.75rem; }
+.px-2 { padding-left: 0.5rem; padding-right: 0.5rem; }
+.px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+.px-4 { padding-left: 1rem; padding-right: 1rem; }
+.px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+.py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+.py-1\.5 { padding-top: 0.375rem; padding-bottom: 0.375rem; }
+.py-2\.5 { padding-top: 0.625rem; padding-bottom: 0.625rem; }
+.py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+.pl-2 { padding-left: 0.5rem; }
+.pt-3 { padding-top: 0.75rem; }
+.pb-1 { padding-bottom: 0.25rem; }
+.shrink-0 { flex-shrink: 0; }
+.w-3 { width: 0.75rem; }
+.w-3\.5 { width: 0.875rem; }
+.w-4 { width: 1rem; }
+.w-5 { width: 1.25rem; }
+.w-8 { width: 2rem; }
+.w-48 { width: 12rem; }
+.w-64 { width: 16rem; }
+.w-full { width: 100%; }
+.h-4 { height: 1rem; }
+.h-5 { height: 1.25rem; }
+.h-8 { height: 2rem; }
+.h-full { height: 100%; }
+.min-h-14 { min-height: 3.5rem; }
+.min-w-0 { min-width: 0; }
+.rounded { border-radius: var(--radius); }
+.rounded-lg { border-radius: var(--radius-lg); }
+.rounded-xl { border-radius: var(--radius-xl); }
+.rounded-full { border-radius: var(--radius-full); }
+.border { border-width: 1px; }
+.border-b { border-bottom-width: 1px; }
+.border-t { border-top-width: 1px; }
+.border-r { border-right-width: 1px; }
+.border-l { border-left-width: 1px; }
+.border-b-2 { border-bottom-width: 2px; }
+.font-bold { font-weight: 600; }
+.font-semibold { font-weight: 500; }
+.uppercase { text-transform: uppercase; }
+.tracking-wider { letter-spacing: 0.05em; }
+.tracking-wide { letter-spacing: 0.025em; }
+.whitespace-nowrap { white-space: nowrap; }
+.truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-xs { font-size: 0.75rem; }
+.text-sm { font-size: 0.875rem; }
+.text-base { font-size: 1rem; }
+.text-lg { font-size: 1.125rem; }
+.leading-none { line-height: 1; }
+.select-none { user-select: none; }
+.outline-none { outline: none; }
+.resize-none { resize: none; }
+.z-30 { z-index: 30; }
+.z-50 { z-index: 50; }
+.fixed { position: fixed; }
+.inset-0.fixed { top: 0; right: 0; bottom: 0; left: 0; }
+
+/* Color helpers (inline fallback if tokens not loaded) */
+.bg-\[\#011525\], .bg-surface { background-color: #011525; }
+.bg-\[\#0d1420\], .bg-\[\#0d2132\], .bg-surface-container { background-color: #0d2132; }
+.bg-\[\#101319\] { background-color: #101319; }
+.bg-\[\#14171d\] { background-color: #14171d; }
+.bg-\[\#080d14\] { background-color: #080d14; }
+.bg-\[\#00d5ff\] { background-color: #00d5ff; }
+.bg-\[\#080d14\].text-\[\#080d14\] { color: #080d14; }
+
+.text-\[\#d1e4fc\], .text-on-surface { color: #d1e4fc; }
+.text-\[\#91a4ba\], .text-on-surface-variant { color: #91a4ba; }
+.text-\[\#00d5ff\] { color: #00d5ff; }
+.text-\[\#a879ff\] { color: #a879ff; }
+.text-\[\#e7f0fa\] { color: #e7f0fa; }
+.text-\[\#4b617a\], .text-text-muted { color: #4b617a; }
+.text-slate-200 { color: #e2e8f0; }
+.text-slate-300 { color: #cbd5e1; }
+.text-slate-400 { color: #94a3b8; }
+.text-slate-500 { color: #64748b; }
+.text-white { color: #ffffff; }
+
+.border-\[\#26374a\], .border-outline { border-color: #26374a; }
+.border-\[\#00d5ff\], .border-primary-container { border-color: #00d5ff; }
+.border-slate-700 { border-color: #334155; }
+.border-slate-800 { border-color: #1e293b; }
+.border-transparent { border-color: transparent; }
+
+.shadow-sm { box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05); }
+.shadow-lg { box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
+.shadow-2xl { box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.5); }
+
+.transition { transition: all 0.2s ease; }
+.transition-all { transition: all 0.2s ease; }
+.active\:scale-95:active { transform: scale(0.95); }
+
+/* Bottom dock (legacy) */
+#bottom-dock {
+  display: none; /* replaced by right-panel tabs in new layout */
+}
+
+/* Hide bottom dock tabs/styles that conflict with new layout */
+.dock-tabs, .dock-content, .dock-section, .dock-input-bar,
+.serial-output, .serial-line, .serial-msg, .dock-input {
+  display: none;
+}

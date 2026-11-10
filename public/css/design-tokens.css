@@ -1,0 +1,474 @@
+/* ==========================================================================
+   ESP Simulator Studio — Stitch Design System Tokens
+   Extracted from cybernetic_electronics_ide/DESIGN.md
+   ========================================================================== */
+
+/* Root theme: all tokens as CSS custom properties so they can be swapped
+   per theme (dark only for now) without touching component classes. */
+:root {
+  /* ── Colors ── */
+  --color-surface: #011525;
+  --color-surface-dim: #011525;
+  --color-surface-bright: #283b4d;
+  --color-surface-container-lowest: #000f1e;
+  --color-surface-container-low: #081d2e;
+  --color-surface-container: #0d2132;
+  --color-surface-container-high: #192b3d;
+  --color-surface-container-highest: #243649;
+
+  --color-on-surface: #d1e4fc;
+  --color-on-surface-variant: #bbc9ce;
+  --color-inverse-surface: #d1e4fc;
+  --color-inverse-on-surface: #1f3244;
+
+  --color-outline: #859398;
+  --color-outline-variant: #3c494e;
+
+  --color-surface-tint: #35d7ff;
+  --color-primary: #a9e9ff;
+  --color-on-primary: #003642;
+  --color-primary-container: #00d5ff;
+  --color-on-primary-container: #00586b;
+  --color-inverse-primary: #00677d;
+
+  --color-secondary: #adc6ff;
+  --color-on-secondary: #002e68;
+  --color-secondary-container: #0369dc;
+  --color-on-secondary-container: #ecf0ff;
+
+  --color-tertiary: #e8d9ff;
+  --color-on-tertiary: #40008c;
+  --color-tertiary-container: #d1b7ff;
+  --color-on-tertiary-container: #6230b6;
+
+  --color-error: #ffb4ab;
+  --color-on-error: #690005;
+  --color-error-container: #93000a;
+  --color-on-error-container: #ffdad6;
+
+  --color-primary-fixed: #b3ebff;
+  --color-primary-fixed-dim: #35d7ff;
+  --color-on-primary-fixed: #001f27;
+  --color-on-primary-fixed-variant: #004e5f;
+
+  --color-secondary-fixed: #d8e2ff;
+  --color-secondary-fixed-dim: #adc6ff;
+  --color-on-secondary-fixed: #001a41;
+  --color-on-secondary-fixed-variant: #004493;
+
+  --color-tertiary-fixed: #ebdcff;
+  --color-tertiary-fixed-dim: #d3bbff;
+  --color-on-tertiary-fixed: #260059;
+  --color-on-tertiary-fixed-variant: #5823ac;
+
+  --color-background: #011525;
+  --color-on-background: #d1e4fc;
+  --color-surface-variant: #243649;
+
+  /* ── Telemetry / Logic Accents (hardware-instrument palette) ── */
+  --color-primary-high: #00d5ff;            /* Electric Cyan — active / running */
+  --color-secondary-accent: #438bff;        /* Cobalt Blue — compile / bus */
+  --color-tertiary-accent: #a879ff;         /* Ionized Violet — I2C/SPI / memory */
+  --color-logic-high: #29d69a;              /* Phosphor Emerald — logic 1 / 3.3V / 5V */
+  --color-tri-state: #ffbd58;               /* High-impedance warning */
+  --color-fault: #ff6478;                   /* Thermal / short / syntax fault */
+
+  --color-text-main: #e7f0fa;
+  --color-text-secondary: #91a4ba;
+  --color-text-muted: #4b617a;
+
+  /* ── Typography ── */
+  --font-heading: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "Fira Code", "JetBrains Mono", monospace;
+
+  --text-headline-lg: 2rem / 2.5rem 600 -0.02em;
+  --text-headline-md: 1.5rem / 2rem 500 -0.01em;
+  --text-headline-sm: 1.125rem / 1.5rem 500 0em;
+  --text-body-lg: 1rem / 1.5rem 400;
+  --text-body-md: 0.875rem / 1.25rem 400;
+  --text-body-sm: 0.75rem / 1rem 400;
+  --text-label-lg: 0.875rem / 1.25rem 500 0.02em;
+  --text-label-md: 0.75rem / 1rem 500 0.04em;
+  --text-label-sm: 0.625rem / 0.875rem 600 0.06em;
+  --text-code-stream: 0.8125rem / 1.25rem 400 0em;
+
+  /* ── Radii ── */
+  --radius-sm: 0.125rem;
+  --radius: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-full: 9999px;
+
+  /* ── Spacing ── */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 0.75rem;
+  --space-lg: 1rem;
+  --space-xl: 1.5rem;
+  --gutter: 0.75rem;
+  --margin: 1rem;
+
+  /* ── Breakpoints ── */
+  --bp-tablet: 768px;
+  --bp-desktop: 1280px;
+}
+
+/* ==========================================================================
+   Utility classes (tailwind-free, design-system native)
+   ========================================================================== */
+
+/* Typography */
+.font-heading { font-family: var(--font-heading); }
+.font-body    { font-family: var(--font-body); }
+.font-mono    { font-family: var(--font-mono); }
+
+.text-label-sm {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 600;
+  line-height: 0.875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.text-label-md {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.text-label-lg {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.text-headline-lg {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 2.5rem;
+  letter-spacing: -0.02em;
+}
+
+.text-headline-md {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 2rem;
+  letter-spacing: -0.01em;
+}
+
+.text-headline-sm {
+  font-family: var(--font-heading);
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  letter-spacing: 0em;
+}
+
+.text-body-lg { font-family: var(--font-body); font-size: 1rem; line-height: 1.5rem; font-weight: 400; }
+.text-body-md { font-family: var(--font-body); font-size: 0.875rem; line-height: 1.25rem; font-weight: 400; }
+.text-body-sm { font-family: var(--font-body); font-size: 0.75rem; line-height: 1rem; font-weight: 400; }
+.text-code-stream {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.25rem;
+  font-weight: 400;
+  letter-spacing: 0em;
+}
+
+/* Color helpers */
+.bg-surface { background-color: var(--color-surface); }
+.bg-surface-container { background-color: var(--color-surface-container); }
+.bg-surface-container-high { background-color: var(--color-surface-container-high); }
+.bg-surface-variant { background-color: var(--color-surface-variant); }
+.bg-primary-container { background-color: var(--color-primary-container); }
+.bg-on-primary-container { color: var(--color-on-primary-container); }
+
+.text-on-surface { color: var(--color-on-surface); }
+.text-on-surface-variant { color: var(--color-on-surface-variant); }
+.text-outline { color: var(--color-outline); }
+
+.border-outline { border-color: var(--color-outline); }
+.border-outline-variant { border-color: var(--color-outline-variant); }
+.border-primary-container { border-color: var(--color-primary-container); }
+
+/* Radii */
+.rounded-sm { border-radius: var(--radius-sm); }
+.rounded    { border-radius: var(--radius); }
+.rounded-md { border-radius: var(--radius-md); }
+.rounded-lg { border-radius: var(--radius-lg); }
+.rounded-xl { border-radius: var(--radius-xl); }
+.rounded-full { border-radius: var(--radius-full); }
+
+/* Spacing utilities (4px-grid anchors) */
+.p-xs { padding: var(--space-xs); }
+.p-sm { padding: var(--space-sm); }
+.p-md { padding: var(--space-md); }
+.p-lg { padding: var(--space-lg); }
+.p-xl { padding: var(--space-xl); }
+
+.px-sm { padding-left: var(--space-sm); padding-right: var(--space-sm); }
+.py-sm { padding-top: var(--space-sm); padding-bottom: var(--space-sm); }
+
+.m-xs { margin: var(--space-xs); }
+.m-sm { margin: var(--space-sm); }
+.m-md { margin: var(--space-md); }
+.m-lg { margin: var(--space-lg); }
+.mb-sm { margin-bottom: var(--space-sm); }
+.mb-md { margin-bottom: var(--space-md); }
+.mb-lg { margin-bottom: var(--space-lg); }
+.mt-md { margin-top: var(--space-md); }
+.mt-lg { margin-top: var(--space-lg); }
+.mr-sm { margin-right: var(--space-sm); }
+
+.gap-xs { gap: var(--space-xs); }
+.gap-sm { gap: var(--space-sm); }
+.gap-md { gap: var(--space-md); }
+
+/* ==========================================================================
+   Component shells per design system spec
+   ========================================================================== */
+
+/* Panel (Level 1 dock panel) */
+.panel {
+  background-color: var(--color-surface-container-low);  /* #111B29 panel */
+  border: 1px solid var(--color-outline);                /* #26374A */
+  border-radius: var(--radius);
+}
+
+/* Elevated sub-panel (Level 2 active card) */
+.panel-elevated {
+  background-color: var(--color-surface-container-high); /* #162233 */
+  border: 1px solid var(--color-outline);
+  border-radius: var(--radius);
+}
+
+/* Overlay / modal (Level 3) */
+.panel-overlay {
+  background-color: var(--color-surface-container-high); /* #162233 */
+  border: 1px solid var(--color-primary-container);      /* #00D5FF */
+  border-radius: var(--radius-lg);
+  box-shadow: 0 0 16px rgba(0, 213, 255, 0.12);
+}
+
+/* Surface breadcrumb / toolbar recessed */
+.surface-recessed {
+  background-color: var(--color-surface-container-low);  /* #0D1420 */
+  border: 1px solid var(--color-outline);
+  border-radius: var(--radius);
+}
+
+/* ── Buttons ── */
+/* Primary: Electric Cyan background, dark text */
+.btn-primary {
+  background-color: var(--color-primary-container);   /* #00D5FF */
+  color: #080d14;
+  border: 1px solid var(--color-primary-container);
+  border-radius: var(--radius-lg);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+}
+.btn-primary:hover {
+  background-color: var(--color-primary-fixed-dim);   /* #35D7FF */
+  box-shadow: 0 0 8px rgba(0, 213, 255, 0.45);
+}
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+/* Secondary: recessed panel background */
+.btn-secondary {
+  background-color: #111b29;
+  color: #e7f0fa;
+  border: 1px solid var(--color-outline);
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+.btn-secondary:hover {
+  border-color: var(--color-secondary-accent);        /* #438BFF */
+  background-color: var(--color-surface-container-high);
+}
+
+/* Destructive: fault red */
+.btn-destructive {
+  background-color: transparent;
+  color: var(--color-fault);                          /* #FF6478 */
+  border: 1px solid var(--color-fault);
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.btn-destructive:hover {
+  background-color: var(--color-fault);
+  color: #080d14;
+}
+
+/* Icon-only chip button */
+.btn-chip {
+  width: 2rem;
+  height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #101319;
+  color: #91a4ba;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--radius);
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.btn-chip:hover {
+  background-color: #1f2430;
+  color: #e7f0fa;
+  border-color: var(--color-primary-container);
+}
+
+/* ── Fields ── */
+.input-field {
+  background-color: #0d1420;
+  border: 1px solid var(--color-outline);
+  color: #e7f0fa;
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  padding: 0.5rem 0.75rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  height: 28px; /* ultra-dense telemetry input */
+}
+.input-field::placeholder { color: var(--color-text-muted); }
+.input-field:focus {
+  border-color: var(--color-primary-container);
+  box-shadow: 0 0 0 1px var(--color-primary-container);
+}
+
+.input-select {
+  background-color: transparent;
+  color: #e7f0fa;
+  border: 1px solid var(--color-outline);
+  border-radius: var(--radius);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  outline: none;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+}
+.input-select option { background-color: #101319; color: #e7f0fa; }
+
+/* ── Toggle switch (28x14 track, 10x10 slug) ── */
+.toggle-track {
+  position: relative;
+  width: 28px;
+  height: 14px;
+  background-color: #0d1420;
+  border: 1px solid var(--color-outline);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+}
+.toggle-slug {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 10px;
+  height: 10px;
+  background-color: #0d1420;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: 2px;
+  transition: all 0.1s linear;
+}
+.toggle-track.active { border-color: var(--color-primary-container); background-color: rgba(0,213,255,0.15); }
+.toggle-track.active .toggle-slug {
+  left: calc(100% - 12px);
+  background-color: var(--color-primary-container);
+  border-color: var(--color-primary-container);
+}
+
+/* ── Checkbox ── */
+.checkbox {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--color-outline);
+  border-radius: 2px;
+  background-color: #0d1420;
+  cursor: pointer;
+}
+.checkbox.checked {
+  background-color: var(--color-primary-container);
+  border-color: var(--color-primary-container);
+}
+.checkbox.checked::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  background-color: #080d14;
+  border-radius: 1px;
+  transform: translate(-50%, -50%);
+}
+
+/* ── Wire color pill ── */
+.wire-pill {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255,255,255,0.25);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.wire-pill.active { transform: scale(1.25); box-shadow: 0 0 6px currentColor; }
+.wire-pill:hover:not(.active) { transform: scale(1.1); }
+
+/* ── Pin pill (GPIO inspector) ── */
+.pin-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  background-color: #0d1420;
+  border: 1px solid var(--color-outline);
+  border-radius: var(--radius);
+  padding: 0.125rem 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #e7f0fa;
+}
+.pin-pip {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background-color: #91a4ba;
+}
+.pin-pip.high { background-color: var(--color-primary-high); box-shadow: 0 0 6px rgba(0,213,255,0.8); }
+.pin-pip.pwm { background-color: var(--color-tertiary-accent); box-shadow: 0 0 6px rgba(168,121,255,0.8); }
+.pin-pip.vcc { background-color: var(--color-fault); }
+.pin-pip.gnd { background-color: var(--color-logic-high); }
+
+/* ── Scrollbar (minimal, no organic shadow) ── */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #0a1018; }
+::-webkit-scrollbar-thumb { background: #26374a; border-radius: var(--radius-full); }
+::-webkit-scrollbar-thumb:hover { background: #3c494e; }
