@@ -16,14 +16,54 @@ An interactive visual circuit simulator and development lab for popular Espressi
 ## Prerequisites
 - Node.js >= 18.0.0
 - npm
-- Apple Clang++ (included with Xcode Command Line Tools)
-- Python 3
+- (Optional) Clang++ / g++ / MSVC for native C++ execution
+- (Optional) Python 3 for native Python execution
 
 ## Getting Started
 
-### 1. Start Server
+### Install Dependencies
 ```bash
 cd /path/to/esp_simulator
+npm install
+```
+
+### Option 1: Run as a Desktop App (Recommended)
+
+**Development mode:**
+```bash
+npm run app:dev
+```
+This launches the Electron desktop application. The backend server starts automatically — no manual `node server.js` needed.
+
+**Global command (run from any directory):**
+After installing, create a global launcher. On Windows, place `esp-sim.cmd` in your PATH, then simply type:
+```bash
+esp-sim
+```
+Supports:
+- `esp-sim` — Launch development Electron app
+- `esp-sim --dev` — Same as above
+- `esp-sim --portable` — Launch the packaged portable executable
+
+**Double-click launchers:**
+- `run_as_app.cmd` — Windows batch file that launches the Electron app
+- `run_electron.bat` — Alternative Windows batch launcher
+
+**Build and install (Windows):**
+```powershell
+npm run app:build:all
+```
+This produces three artifacts in `dist/`:
+- `ESP-Simulator-Studio-Setup-x64.exe` — NSIS installer (install like a normal Windows app)
+- `ESP-Simulator-Studio-Portable-x64.exe` — Portable executable (no installation needed)
+- `dist/win-unpacked/ESP Simulator Studio.exe` — Unpacked application
+
+After installing via NSIS, launch from the Start Menu or Desktop shortcut.
+
+### Option 2: Run in Browser (PWA)
+
+**Start the server:**
+```bash
 node server.js
 ```
 Or use npm:
@@ -31,13 +71,25 @@ Or use npm:
 npm start
 ```
 
-### 2. Open in Browser
+**Open in browser:**
 Visit: **http://127.0.0.1:3000**
 
-### 3. Run Tests
+The app works as a Progressive Web App — you can install it from the browser.
+
+### Running Tests
+The tests are integration tests that require the backend server to be running.
+
+**Terminal 1 (start server):**
 ```bash
-npm test
+node server.js
 ```
+
+**Terminal 2 (run tests):**
+```bash
+node --test
+```
+
+Expected results: 22 total, 17 passed, 5 skipped (skipped when C++ compiler/Python not installed — this is expected, not a failure).
 
 ### Environment Variables (Optional)
 | Variable | Purpose | Default |
