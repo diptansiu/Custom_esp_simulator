@@ -44,3 +44,4 @@ test_output.txt
 # Backup files
 *.bak
 * copy.*
+* copy/
